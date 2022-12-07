@@ -2,9 +2,15 @@ import React from "react";
 import './todoListItem.css';
 
 class TodoListItem extends React.Component {
+    state = {
+        done: false,
+    }
+
 
     onLabelClick = () => {
-        console.log(`Done: ${this.props.label}`);
+        this.setState({
+            done: !this.state.done
+        })
     }
 
 
@@ -12,6 +18,14 @@ class TodoListItem extends React.Component {
 
     render() {
         const { label, important = false } = this.props;
+        const { done } = this.state;
+
+        let classNames = 'todo-list-item';
+        if (done) {
+            console.log('classNames');
+            classNames += ' done';
+        }
+        console.log(classNames);
 
         const style = {
             color: important ? 'steelblue' : 'black',
@@ -19,7 +33,7 @@ class TodoListItem extends React.Component {
         };
 
         return (
-            <span className="todo-list-item" >
+            <span className={classNames} >
                 <span className="todo-list-item-label"
                     style={style}
                     onClick={this.onLabelClick}>
