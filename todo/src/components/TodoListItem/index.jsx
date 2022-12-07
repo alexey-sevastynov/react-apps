@@ -4,6 +4,7 @@ import './todoListItem.css';
 class TodoListItem extends React.Component {
     state = {
         done: false,
+        important: false,
     }
 
 
@@ -13,12 +14,18 @@ class TodoListItem extends React.Component {
         })
     }
 
+    onMarkImportamt = () => {
+        this.setState({
+            important: !this.state.important
+        })
+    }
+
 
 
 
     render() {
-        const { label, important = false } = this.props;
-        const { done } = this.state;
+        const { label } = this.props;
+        const { done, important } = this.state;
 
         let classNames = 'todo-list-item';
         if (done) {
@@ -27,15 +34,13 @@ class TodoListItem extends React.Component {
         }
         console.log(classNames);
 
-        const style = {
-            color: important ? 'steelblue' : 'black',
-            fontWeight: important ? 'bold' : 'normal'
-        };
+        if (important) {
+            classNames += ' important';
+        }
 
         return (
             <span className={classNames} >
                 <span className="todo-list-item-label"
-                    style={style}
                     onClick={this.onLabelClick}>
                     {label}
                 </span>
@@ -46,7 +51,8 @@ class TodoListItem extends React.Component {
                         <i className="bi bi-trash" />
                     </button>
                     <button type="button"
-                        className="btn btn-outline-success btn-sm float-right">
+                        className="btn btn-outline-success btn-sm float-right"
+                        onClick={this.onMarkImportamt}>
                         <i className="bi bi-exclamation-lg"></i>
                     </button>
                 </div>
