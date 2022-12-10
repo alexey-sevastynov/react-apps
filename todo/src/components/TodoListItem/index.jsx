@@ -33,10 +33,9 @@ class TodoListItem extends React.Component {
 
         let classNames = 'todo-list-item';
         if (done) {
-            console.log('classNames');
             classNames += ' done';
         }
-        console.log(classNames);
+
 
         if (important) {
             classNames += ' important';
