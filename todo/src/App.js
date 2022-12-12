@@ -31,6 +31,18 @@ class App extends React.Component {
         }
     }
 
+    toggleProperty(arr, id, propName) {
+
+        const oldItem = arr.find((element) => element.id === id);
+        const newItem = { ...oldItem, [propName]: !oldItem[propName] };
+
+        const newArray = arr.map(element => element === oldItem ? element = newItem : element)
+
+        return newArray;
+    }
+
+
+
     deleteItem = (id) => {
         this.setState(({ todoData }) => {
             const newArray = todoData.filter((item) => (item.id !== id));
@@ -53,30 +65,33 @@ class App extends React.Component {
                 todoData: newArr
             }
         })
-    }
+    };
 
     onToggleImportant = (id) => {
-
+        this.setState(({ todoData }) => {
+            return {
+                todoData: this.toggleProperty(todoData, id, 'important')
+            };
+        });
     };
 
     onToggleDone = (id) => {
         this.setState(({ todoData }) => {
-            const oldItem = todoData.find((element) => element.id === id);
-            const newItem = { ...oldItem, done: !oldItem.done };
-
-            const newArray = todoData.map(element => element === oldItem ? element = newItem : element)
-
             return {
-                todoData: newArray
+                todoData: this.toggleProperty(todoData, id, 'done')
             };
-        })
-    }
+        });
+
+    };
+
+
 
     render() {
+        const { todoData } = this.state;
 
-        const doneCount = this.state.todoData.filter((element) => element.done).length;
+        const doneCount = todoData.filter((element) => element.done).length;
 
-        const todoCount = this.state.todoData.length - doneCount;
+        const todoCount = todoData.length - doneCount;
 
         console.log(todoCount, 'todoCount');
 
