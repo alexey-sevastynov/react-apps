@@ -56,12 +56,20 @@ class App extends React.Component {
     }
 
     onToggleImportant = (id) => {
-        console.log('toggle impotrant', id);
+
     };
 
     onToggleDone = (id) => {
-        console.log('toggle done', id);
+        this.setState(({ todoData }) => {
+            const oldItem = todoData.find((element) => element.id === id);
+            const newItem = { ...oldItem, done: !oldItem.done };
 
+            const newArray = todoData.map(element => element === oldItem ? element = newItem : element)
+
+            return {
+                todoData: newArray
+            };
+        })
     }
 
     render() {
