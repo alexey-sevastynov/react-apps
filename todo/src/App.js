@@ -11,15 +11,25 @@ import TodoList from './components/TodoList';
 
 class App extends React.Component {
 
-    maxId = 100;
+    maxId = 1;
 
     state = {
         todoData: [
-            { id: 1, label: 'Drink Coffee', important: false },
-            { id: 2, label: 'Make Awesome App', important: true },
-            { id: 3, label: 'Have a lunch', important: false },
+            this.createTodoItem('Drink Coffee'),
+            this.createTodoItem('Make Awesome App'),
+            this.createTodoItem('Have a lunch')
         ],
     };
+
+
+    createTodoItem(label) {
+        return {
+            label,
+            important: false,
+            done: false,
+            id: this.maxId++
+        }
+    }
 
     deleteItem = (id) => {
         this.setState(({ todoData }) => {
@@ -34,11 +44,7 @@ class App extends React.Component {
     addItem = (text) => {
         // console.log('added', text)
 
-        const newItem = {
-            label: text,
-            important: false,
-            id: this.maxId++
-        };
+        const newItem = this.createTodoItem(text);
 
 
         this.setState(({ todoData }) => {
