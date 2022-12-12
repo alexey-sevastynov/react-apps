@@ -73,10 +73,17 @@ class App extends React.Component {
     }
 
     render() {
+
+        const doneCount = this.state.todoData.filter((element) => element.done).length;
+
+        const todoCount = this.state.todoData.length - doneCount;
+
+        console.log(todoCount, 'todoCount');
+
         return (
             <div className='todo-app' >
 
-                <AppHeader />
+                <AppHeader toDo={todoCount} done={doneCount} />
                 <div className='top-panel d-flex'>
                     <SearchPanel />
                     <ItemStatusFilter />
