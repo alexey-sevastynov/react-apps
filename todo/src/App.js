@@ -1,5 +1,6 @@
 import React from 'react'
 import './app.css';
+import AddItem from './components/AddItem';
 
 
 import AppHeader from './components/AppHeader';
@@ -10,6 +11,7 @@ import TodoList from './components/TodoList';
 
 class App extends React.Component {
 
+    maxId = 100;
 
     state = {
         todoData: [
@@ -29,6 +31,24 @@ class App extends React.Component {
         });
     };
 
+    addItem = (text) => {
+        // console.log('added', text)
+
+        const newItem = {
+            label: text,
+            important: false,
+            id: this.maxId++
+        };
+
+
+        this.setState(({ todoData }) => {
+            const newArr = [...todoData, newItem];
+            return {
+                todoData: newArr
+            }
+        })
+    }
+
     render() {
         return (
             <div className='todo-app' >
@@ -41,7 +61,7 @@ class App extends React.Component {
 
                 <TodoList todos={this.state.todoData}
                     onDeleted={this.deleteItem} />
-
+                <AddItem addItem={this.addItem} />
             </div>
         );
 

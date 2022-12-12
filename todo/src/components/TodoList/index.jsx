@@ -1,4 +1,5 @@
 import React from "react";
+
 import TodoListItem from "../TodoListItem";
 
 import './todoList.css';
@@ -18,9 +19,13 @@ const TodoList = ({ todos, onDeleted }) => {
 
 
     return (
-        <ul className="list-group todo-list">
-            {elementsLi}
-        </ul>
+        <>
+            <ul className="list-group todo-list">
+                {elementsLi}
+            </ul>
+            
+        </>
+
     );
 }
 
