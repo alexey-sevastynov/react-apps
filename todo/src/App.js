@@ -49,6 +49,15 @@ class App extends React.Component {
         })
     }
 
+    onToggleImportant = (id) => {
+        console.log('toggle impotrant', id);
+    };
+
+    onToggleDone = (id) => {
+        console.log('toggle done', id);
+
+    }
+
     render() {
         return (
             <div className='todo-app' >
@@ -59,8 +68,12 @@ class App extends React.Component {
                     <ItemStatusFilter />
                 </div>
 
-                <TodoList todos={this.state.todoData}
-                    onDeleted={this.deleteItem} />
+                <TodoList
+                    todos={this.state.todoData}
+                    onDeleted={this.deleteItem}
+                    onToggleDone={this.onToggleDone}
+                    onToggleImportant={this.onToggleImportant}
+                />
                 <AddItem addItem={this.addItem} />
             </div>
         );
