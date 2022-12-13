@@ -19,6 +19,11 @@ class AddItem extends React.Component {
     onSubmit = (event) => {
         event.preventDefault();
         this.props.addItem(this.state.label);
+        this.setState(({ label }) => {
+            return {
+                label: ''
+            };
+        });
     }
 
     render() {
@@ -33,10 +38,11 @@ class AddItem extends React.Component {
                     className='form-control'
                     placeholder='what need to do?'
                     onChange={this.onLabelChange}
+                    value={this.state.label}
                 />
                 <button
                     className='btn btn-outline-secondary'
-                    // onClick={() => this.props.addItem('Hello World!')}
+                // onClick={() => this.props.addItem('Hello World!')}
                 >Add Item</button>
             </form>
         )
