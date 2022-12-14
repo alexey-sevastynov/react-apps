@@ -2,15 +2,15 @@ import React from "react";
 import './todoListItem.css';
 
 class TodoListItem extends React.Component {
- 
+
 
     render() {
         const { label, onDeleted,
             onToggleImportant, onToggleDone,
-        important, done } = this.props;
+            important, done, togleImportant } = this.props;
 
-     
 
+        let classAddGrenn = 'btn btn-outline-success btn-sm float-right';
         let classNames = 'todo-list-item';
         if (done) {
             classNames += ' done';
@@ -19,6 +19,7 @@ class TodoListItem extends React.Component {
 
         if (important) {
             classNames += ' important';
+            classAddGrenn += ' green';
         }
 
         return (
@@ -35,7 +36,7 @@ class TodoListItem extends React.Component {
                         <i className="bi bi-trash" />
                     </button>
                     <button type="button"
-                        className="btn btn-outline-success btn-sm float-right"
+                        className={classAddGrenn}
                         onClick={onToggleImportant}>
                         <i className="bi bi-exclamation-lg"></i>
                     </button>
